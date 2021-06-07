@@ -19,13 +19,21 @@ public class TrafficLightCtrl {
 
     private boolean doRun = true;
 
-    public TrafficLightCtrl() {
+    private static TrafficLightCtrl instance = null;
+
+    private TrafficLightCtrl() {
         super();
         initStates();
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
 
         currentState.notifyObserver();
+    }
+
+    public static TrafficLightCtrl getInstance() {
+        if (instance == null)
+            instance = new TrafficLightCtrl();
+        return instance;
     }
 
     private void initStates() {
